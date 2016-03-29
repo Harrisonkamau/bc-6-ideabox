@@ -1,5 +1,5 @@
 # import the Flask class from slask module
-from flask import Flask, render_template, request, redirect, url_for, session,flash
+from flask import Flask, render_template, request, redirect, url_for, session,flash, g
 from functools import wraps
 import sqlite3
 
@@ -26,7 +26,11 @@ def login_required(f):
 def home():
     # return "Hello, world!" # returns a string
     g.db = connect_db()
-    return render_template('index.html')
+    cur = g.db.execute('select * from posts')
+    posts =[dict(title=row[0], description=row[1]) for row in cur.fetchall()]
+    print posts
+    g.db.close()
+    return render_template('index.html', posts=posts)
 
 
 @app.route('/welcome')

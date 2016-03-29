@@ -4,4 +4,13 @@
 <h1>Welcome to IdeaBox!</h1>
 <br>
 <p>click <a href="/logout">here</a> to logout. </p>
-{% endblock%}
+<br><br>
+<!-- All posts -->
+<h3>Posts:</h3>
+{% for post in posts %}
+  <strong>Title:</strong> {{ post.title }} <br>
+  <strong>Post:</strong> {{ post.description }} <br>
+<br>
+{% endfor %}
+
+{% endblock %}
