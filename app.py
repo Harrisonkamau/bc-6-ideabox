@@ -27,8 +27,15 @@ def home():
     # return "Hello, world!" # returns a string
     g.db = connect_db()
     cur = g.db.execute('select * from posts')
-    print cur
-    print cur.fetchall()
+    # print cur
+    # print cur.fetchall()
+    post_dict = {}
+    posts_list = []
+    for row in cur.fetchall():
+        post_dict["title"] = row[0]
+        post_dict["description"] = row[1]
+        posts_list.append(post_dict)
+        print posts_list
     posts =[dict(title=row[0], description=row[1]) for row in cur.fetchall()]
     # print posts
     g.db.close()
