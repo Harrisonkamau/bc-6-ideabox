@@ -27,8 +27,10 @@ def home():
     # return "Hello, world!" # returns a string
     g.db = connect_db()
     cur = g.db.execute('select * from posts')
+    print cur
+    print cur.fetchall()
     posts =[dict(title=row[0], description=row[1]) for row in cur.fetchall()]
-    print posts
+    # print posts
     g.db.close()
     return render_template('index.html', posts=posts)
 
