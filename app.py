@@ -1,13 +1,22 @@
+'''This is the application logic'''
+
 # import the Flask class from slask module
 from flask import Flask, render_template, request, redirect, url_for, session,flash, g
+from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 import sqlite3
-
+import os
+from config import Config
 # create the application object
 app = Flask(__name__)
 
-app.secret_key = "lilian wanjiru"
+# app.config.from_object(os.environ['APP_SETTINGS']) # application configuration
+app.config.from_object('config')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.database = "posts.db"
+app.secret_key = 'This_is_confidential'
+
+db = SQLAlchemy(app)
 
 # login required decorator
 def login_required(f):
