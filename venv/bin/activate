@@ -39,7 +39,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/run/media/harrison/326C54BF6C548011/flask-intro/venv"
+VIRTUAL_ENV="/home/harrison/bc-6-ideabox/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

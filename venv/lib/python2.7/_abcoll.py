@@ -1,1 +1,1 @@
-/usr/lib64/python2.7/_abcoll.pyyy
+/usr/lib64/python2.7/_abcoll.py

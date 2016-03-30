@@ -1,1 +1,1 @@
-/usr/lib64/python2.7/warnings.pyy
+/usr/lib64/python2.7/warnings.py

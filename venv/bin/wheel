@@ -1,4 +1,4 @@
-#!/run/media/harrison/326C54BF6C548011/flask-intro/venv/bin/python
+#!/home/harrison/bc-6-ideabox/venv/bin/python
 
 # -*- coding: utf-8 -*-
 import re

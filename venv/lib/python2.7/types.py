@@ -1,1 +1,1 @@
-/usr/lib64/python2.7/types.pye.py
+/usr/lib64/python2.7/types.py

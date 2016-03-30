@@ -32,7 +32,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/run/media/harrison/326C54BF6C548011/flask-intro/venv"
+set -gx VIRTUAL_ENV "/home/harrison/bc-6-ideabox/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
