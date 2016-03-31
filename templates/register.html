@@ -1,0 +1,34 @@
+{% extends "homepage.html" %}
+{% block content %}
+   <div class="container">
+    <div class="row" style="margin-top:60px;">
+      <div class="col-md-4 col-md-offset-4">
+        <form method="POST" action="{{url_for('register')}}" accept-charset="UTF-8" role="form" id="signupform" class="form-signup"><input name="_token" type="hidden">
+          <fieldset>
+              <h3 class="sign-up-title" style="color:dimgray; text-align: center">Sign up today</h3>
+              
+              <hr class="colorgraph">
+              <input class="form-control name-title" placeholder="Username" name="username" type="text" value="{{request.form.username}}">
+              <input class="form-control email-title" placeholder="E-mail" name="email" type="text" value="{{request.form.email}}">
+              <input class="form-control" placeholder="Password" name="password" type="password" value="{{request.form.email}}">
+              <div class="checkbox">
+                <input id="send_updates" type="checkbox"> <label for=
+                "send_updates">Send me occasional email updates</label>
+              </div>
+              <br>
+              <div class="control-group">
+              <br>
+                <div class="controls">
+                  <input class="btn btn-lg btn-success btn-block" type="submit" value="Sign up">
+                </div>
+              </div>
+             
+            </fieldset>
+          </form>
+      </div>
+      </div>
+</div>
+
+{% endblock %}
+
+

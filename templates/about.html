@@ -1,0 +1,15 @@
+{% extends homepage.html%}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to Idea Box</title>
+</head>
+<body>
+	{% block content %}
+	{% for user in Users%}
+		<h1>Welcome to Idea Box{{user}}</h1>
+	{% endblock%}
+
+</body>
+</html>

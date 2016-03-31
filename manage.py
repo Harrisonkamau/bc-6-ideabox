@@ -12,6 +12,18 @@ manager = Manager(app) # manager instance
 
 manager.add_command('db', MigrateCommand)
 
+@manager.command
+def create_admin():
+    """Creates the admin user."""
+    db.session.add(User(
+        username="admin",
+        password="admin",
+        admin=True,
+        confirmed=True,
+        confirmed_on=datetime.datetime.now())
+    )
+    db.session.commit()
+
 
 if __name__=="__main__":
     manager.run()

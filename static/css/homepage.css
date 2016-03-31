@@ -1,0 +1,8 @@
+body {
+  overflow-x: hidden;
+  font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#index{
+	background-color: #76FF03;
+	font-color: white;
+}

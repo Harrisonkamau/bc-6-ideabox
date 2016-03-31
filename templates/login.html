@@ -1,37 +1,14 @@
-{% extends 'base.html'%}
+{% extends 'homepage.html'%}
 {% block content %}
 
-
-<!-- <a id="modal_trigger" href="#modal" class="btn">Click here to Login or register</a>
-<div class="user_login">
-    <form>
-        <label>Username</label> <input type="text" value="{{request.form.username}}"><br>
-        <label>Password</label> <input type="password" value="{{request.form.password}}"><br>
- 
-        <div class="checkbox">
-            <input id="remember" type="checkbox"> <label for=
-            "remember">Remember me on this computer</label>
-        </div>
- 
-        <div class="action_btns">
-            <div class="one_half">
-                <a class="btn back_btn" href="#">Back</a>
-            </div>
- 
-            <div class="one_half last">
-                <a class="btn btn_red" href="#">Login</a>
-            </div>
-        </div>
-    </form>
-    
-    <a class="forgot_password" href="#">Forgot password?</a>
-</div> -->
  <div class="container">
   <div class="row" style="margin-top:60px;">
     <div class="col-md-4 col-md-offset-4">
-      <form method="POST" action="http://bootsnipp.com/login" accept-charset="UTF-8" role="form" id="loginform" class="form-signin"><input name="_token" type="hidden" value="pBDzzRLlUmi0zJwvpqiRJiLMKDdxXQ9RAbqWsoM0">
+      <form method="POST" action="{{ url_for('login')}}" accept-charset="UTF-8" role="form" id="loginform" class="form-signin"><input name="_token" type="hidden">
         <fieldset>
-            <h3 class="sign-up-title" style="color:dimgray; text-align: center">Welcome to IdeaBox! Please sign in</h3>
+            <h3 class="sign-up-title" style="color:dimgray; text-align: center">Welcome to IdeaBox!</h3>
+            <br>
+            <h3 class="text-center" style="color: dimgray">Please sign in</h3>
             
             <hr class="colorgraph">
             <input class="form-control email-title" placeholder="E-mail" name="email" type="text">
@@ -44,7 +21,7 @@
             <p class="text-center" style="margin-top:10px;">OR</p>
             <a class="btn btn-default btn-block" href="http://bootsnipp.com/login/github"><i class="icon-github"></i> Login with Github</a>
             <br>
-            <p class="text-center"><a href="http://bootsnipp.com/register">Register for an account?</a></p>
+            <p class="text-center"><a href="{{ url_for('register') }}">Register for an account?</a></p>
           </fieldset>
         </form>
     </div>
