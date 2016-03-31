@@ -1,48 +1,45 @@
-from app import db
 from sqlalchemy.orm import relationship
 from wtforms import Form, BooleanField, TextField, PasswordField, validators
+from wtforms.validators import InputRequired
 from datetime import datetime
+from wtforms.fields.html5 import EmailField
+from app import db
 
 
 
-class BlogPost(db.Model):
+class PostIdea(db.Model):
     __tablename__ = "posts"
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(20), nullable=False)
     description = db.Column(db.String, nullable=False)
-    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, title, description):
-        self.title = title
-        self.description = description
+    # def __init__(self, title, description):
+    #     self.title = title
+    #     self.description = description
 
     def __repr__(self):
         return "<{}>".format(self.title)
 
 
 class User(db.Model):
-    __tablename__ = "users"
+    # __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String,nullable=False)
-    registered_on = db.Column(db.DateTime, nullable=False)
     admin = db.Column(db.Boolean, nullable=False, default=False)
-    # confirmed = db.Column(db.Boolean, nullable=False, default=False)
-    # confirmed_on = db.Column(db.DateTime, nullable=True)
-    posts = relationship("BlogPost", backref="author")
+    posts = relationship("PostIdea", backref="user")
 
 
-    def __init__(self, name, email, password, admin=False, confirmed_on=None):
+    def __init__(self, name, email, password):
         self.name = name
         self.email = email
         self.password = password
-        self.registered_on = datetime.now()
-        self.admin = admin
-        # self.confirmed = confirmed
-        # self.confirmed_on = confirmed_on #  analyze the difference between the registered_on and confirmed_on dates
+
+
 
     def is_authenticated(self):
         return True
@@ -59,13 +56,18 @@ class User(db.Model):
     def __repr__(self):
         return '<name - {}>'.format(self.name)
 
+# class VotesCount(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.String(20), nullable=False)
+#     description = db.Column(db.String, nullable=False)
+#     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
 
 class RegistrationForm(Form):
-    username = TextField('Username', [validators.Length(min=4, max=25)])
-    email = TextField('Email Address', [validators.Length(min=6, max=35)])
+    username = TextField('Username', validators = [InputRequired('Please enter your name')])
+    email = EmailField('Email Address', validators = [InputRequired('Please enter your email address')])
     password = PasswordField('New Password', [
         validators.Required()
         # validators.EqualTo('confirm', message='Passwords must match')
     ])
-    # confirm = PasswordField('Repeat Password')
-    # accept_tos = BooleanField('I accept the TOS', [validators.Required()])

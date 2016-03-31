@@ -23,6 +23,7 @@
 
 </head>
 <body id="#page-top"class="index">
+	{% block navbar%}
 	<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" id='index'>
         <div class="container">
@@ -62,6 +63,7 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+    {% endblock %}
     {% block content%}
     {% endblock %}
 

@@ -7,7 +7,8 @@ from functools import wraps
 import sqlite3
 import os
 from config import Config
-from models import *
+# from models import *
+
 
 # create the application object
 app = Flask(__name__)
@@ -15,11 +16,12 @@ app = Flask(__name__)
 # app.config.from_object(os.environ['APP_SETTINGS']) # application configuration
 app.config.from_object('config')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
 app.database = "posts.db"
 app.secret_key = 'This_is_confidential'
 
 db = SQLAlchemy(app)
-
+from models import *
 # login required decorator
 def login_required(f):
     @wraps(f)
@@ -32,23 +34,28 @@ def login_required(f):
     return wrap
 
 # use  decorators to link a function to url
-@app.route('/dash')
+@app.route('/dashboard')
 @login_required
 def home():
-    # return "Hello, world!" # returns a string
+    return render_template('index.html')
+
+
+@app.route('/')
+def welcome():
+    # import ipdb; ipdb.set_trace()
+    # Read from db
     g.db = connect_db()
     cur = g.db.execute('select * from posts')
     posts = []
     for row in cur.fetchall():
         posts.append(dict(title=row[0],description=row[1]))
-    # print posts
+    print posts
     g.db.close()
-    return render_template('login.html', posts=posts)
-
-
-@app.route('/')
-
-def welcome():
+    # Check if logged in
+    if 'logged_in' in session:
+        render_template('index.html')
+    else:
+        return render_template("homepage.html", posts=posts)
     return render_template("homepage.html") # render a template
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -74,10 +81,9 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     # import ipdb; ipdb.set_trace()
-    form = RegistrationForm(request.form)
+    form = RegistrationForm(request.form, PostIdea)
     if request.method == 'POST' and form.validate():
-        user = User(form.username.data, form.email.data,
-                    form.password.data)
+        user = User(request.form['username'] , request.form['password'],request.form['email'])
         db.session.add(user)
         db.session.commit()
         flash('User successfully registered')
