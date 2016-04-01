@@ -1,8 +1,8 @@
+
 # IdeaBox
 
 IdeaBox allows users to share and comment on shared ideas.
-~~~
-	<!-- app.py -->
+~~~Python
 	class Vote(object):
     count = 0
     def __init__(self, up, down):
