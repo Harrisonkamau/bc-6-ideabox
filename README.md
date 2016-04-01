@@ -1,19 +1,30 @@
 
 # IdeaBox
 
-IdeaBox allows users to share and comment on shared ideas.
+## Description
+
+
+IdeaBox is a web app made using Flask.
+Allows users to post their idea(s), post their comments and upvote or downvote
+
 ~~~Python
-	class Vote(object):
-    count = 0
-    def __init__(self, up, down):
-        self.up = up
-        self.down = down
+	# Posting an idea
+@app.route('/add_post', methods=['GET', 'POST'])
+@login_required
+def add_post():
+    form = RegistrationForm(request.form, PostIdea)
+    if request.method == 'POST':
+        post = PostIdea(title=request.form['title'], description=request.form['description'])
 
+        db.session.add(post)
 
-    def vote(self):
-        if self.up == True:
-            count += 1
-        else:
-            count -= 1
+        # save the changes to the db
+        db.session.commit()
+    return render_template('add_post.html')
 ~~~
+
+
+## Features
+
+Simple to use
               

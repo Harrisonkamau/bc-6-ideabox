@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Idea Box</title>
+    <title>Posts</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
@@ -41,39 +42,24 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
                     <li>
-                        <a class="page-scroll" href="#">Home</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#team">Team</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="{{url_for('login')}}">login</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="{{url_for('add_post')}}">Share your idea</a>
+                        <a class="page-scroll" href="#top-page">Share your idea</a>
                     </li>
                 </ul>
 
             </div>
             <!-- /.navbar-collapse -->
+            
         </div>
         <!-- /.container-fluid -->
     </nav>
     {% endblock %}
+    <br>
     {% block content%}
-    <h3>Posts:</h3>
-        {% for post in posts %}
-            <strong><a href="{{url_for('post')}}">Title</a></strong> {{ post.title }} <br>
-             <strong>Description:</strong> {{ post.description }} <br>
-        {% endfor %}
-    {% endblock %}
+    <br>
+				<h1>{{data.title}}</h1>
+				<h2>{{data.description}}</h2>
+	{% endblock %}
 
 </body>
 </html>

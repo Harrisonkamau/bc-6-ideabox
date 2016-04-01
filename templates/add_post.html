@@ -19,8 +19,6 @@
     <!-- scripts-->
     <script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.12.2.min.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/jquery-modal.min.js')}}"></script>
-
-
 </head>
 <body id="#page-top"class="index">
 	{% block navbar%}
@@ -41,23 +39,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li>
+                <li>
                         <a class="page-scroll" href="#">Home</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">About</a>
+                        <a class="page-scroll" href="#top-page">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#team">Team</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="{{url_for('login')}}">login</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="{{url_for('add_post')}}">Share your idea</a>
+                        <a class="page-scroll" href="#top-page">Share your idea</a>
                     </li>
                 </ul>
 
@@ -67,13 +56,22 @@
         <!-- /.container-fluid -->
     </nav>
     {% endblock %}
-    {% block content%}
-    <h3>Posts:</h3>
-        {% for post in posts %}
-            <strong><a href="{{url_for('post')}}">Title</a></strong> {{ post.title }} <br>
-             <strong>Description:</strong> {{ post.description }} <br>
-        {% endfor %}
-    {% endblock %}
+    <br><br>
+    <div>
+		<h1>Share your ideas!</h1>
+
+	</div>
+	<div>
+		<form method="POST" action="{{url_for('add_post')}}" >
+			<h2>Title</h2> <br>
+			<input type="text" name="title" placeholder="title"></input>
+			<br>
+			<h2>Description</h2> <br><br>
+			<input type="text" name="description" placeholder="description"></input><br><br>
+			<button type="btn btn-primary">Submit</button>
+			
+		</form>
+	</div>
 
 </body>
 </html>
