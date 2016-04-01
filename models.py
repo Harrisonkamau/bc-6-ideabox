@@ -68,6 +68,7 @@ class VotesCount(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
+
 class RegistrationForm(Form):
     username = TextField('Username', validators = [InputRequired('Please enter your name')])
     email = EmailField('Email Address', validators = [InputRequired('Please enter your email address')])

@@ -6,8 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 import sqlite3
 import os
-from config import Config
-# from models import *
+from config import Config # import the Config class from module config
 
 
 # create the application object
@@ -18,8 +17,9 @@ app.config.from_object('config')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
 app.database = "posts.db"
-app.secret_key = 'This_is_confidential'
+app.secret_key = "This-is-confidential"
 
+# create and config the database object
 db = SQLAlchemy(app)
 from models import *
 # login required decorator
@@ -47,7 +47,7 @@ def welcome():
     # Read from database
     g.db = connect_db()
     cur = g.db.execute('select * from posts')
-    
+
     # create an empty list
     posts = []
     for row in cur.fetchall():
@@ -93,6 +93,21 @@ def register():
         flash('User successfully registered')
         return redirect(url_for('home'))
     return render_template('register.html', form=form)
+
+class Vote(object):
+    count = 0
+    def __init__(self, up, down):
+        self.up = up
+        self.down = down
+
+
+    def vote(self):
+        if self.up == True:
+            count += 1
+        else:
+            count -= 1
+
+
 
 
 
