@@ -15,16 +15,19 @@ class PostIdea(db.Model):
     description = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    # def __init__(self, title, description):
-    #     self.title = title
-    #     self.description = description
+    def __init__(self, title, description, user_id):
+        self.title = title
+        self.description = description
+        self.user_id = user_id
 
+    # A method to reprensent a query when called
     def __repr__(self):
         return "<{}>".format(self.title)
 
 
+# Create a class User
 class User(db.Model):
-    # __tablename__ = "users"
+    __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
@@ -56,12 +59,13 @@ class User(db.Model):
     def __repr__(self):
         return '<name - {}>'.format(self.name)
 
-# class VotesCount(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(20), nullable=False)
-#     description = db.Column(db.String, nullable=False)
-#     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+# create a Votes class
+class VotesCount(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(20), nullable=False)
+    description = db.Column(db.String, nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 class RegistrationForm(Form):
@@ -69,5 +73,4 @@ class RegistrationForm(Form):
     email = EmailField('Email Address', validators = [InputRequired('Please enter your email address')])
     password = PasswordField('New Password', [
         validators.Required()
-        # validators.EqualTo('confirm', message='Passwords must match')
     ])

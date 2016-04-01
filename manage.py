@@ -11,7 +11,7 @@ migrate = Migrate(app, db) # create a migration instance
 manager = Manager(app) # manager instance
 
 manager.add_command('db', MigrateCommand)
-db.create_all()
+# db.create_all()
 @manager.command
 def create_admin():
     """Creates the admin user."""
@@ -26,4 +26,4 @@ def create_admin():
 
 
 if __name__=="__main__":
-    manager.run()
+	manager.run()

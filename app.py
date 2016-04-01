@@ -43,9 +43,12 @@ def home():
 @app.route('/')
 def welcome():
     # import ipdb; ipdb.set_trace()
-    # Read from db
+
+    # Read from database
     g.db = connect_db()
     cur = g.db.execute('select * from posts')
+    
+    # create an empty list
     posts = []
     for row in cur.fetchall():
         posts.append(dict(title=row[0],description=row[1]))
@@ -53,7 +56,7 @@ def welcome():
     g.db.close()
     # Check if logged in
     if 'logged_in' in session:
-        render_template('index.html')
+        render_template('index.html', posts=posts)
     else:
         return render_template("homepage.html", posts=posts)
     return render_template("homepage.html") # render a template
@@ -78,6 +81,7 @@ def logout():
     return redirect(url_for('home'))
 
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     # import ipdb; ipdb.set_trace()
@@ -89,6 +93,8 @@ def register():
         flash('User successfully registered')
         return redirect(url_for('home'))
     return render_template('register.html', form=form)
+
+
 
 def connect_db():
     return sqlite3.connect(app.database)
